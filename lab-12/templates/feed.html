@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Hello from Flask</title>
+<h1> Headlines</h1>
+<body>
+    {% for article in newsFeed %}
+	{% if "the" in article.summary.lower() %}
+   	 <h3> BBC headline </h3>
+	<b>{{article.title}}</b><br />
+	<p>{{article.summary}}</p>
+	{% endif %}
+
+{% endfor %}
+</body>
