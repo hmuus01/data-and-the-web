@@ -1,4 +1,6 @@
 Short Description of all the files in Lab 12. 
+
+
 decorator_1.py – 
 In decorator_1.py there are three functions defined which explain the order of operations in a sense, because there are print statements before and after a function is called. 
 
