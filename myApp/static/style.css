@@ -1,0 +1,21 @@
+
+body {
+  background-color: #fbf7f5;
+}
+.PageTitle {
+text-align: Center;
+}
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height 30%;
+}
+h1{
+font-family: 'Encode Sans Condensed', sans-serif;
+}
+h3{
+font-family: 'Cinzel', serif;
+text-align: Center;
+}
