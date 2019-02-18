@@ -1,10 +1,16 @@
 {% extends "layout.html" %}
+<head>
+<link rel="stylesheet" href="/static/login.css?q=1280549780" media="screen" charset="utf-8" />
+</head>
+
 {% block body %}
+<h1 class= "PageTitle">GymBud</h1>
+<img src="https://www.fitpregnancyworkouts.com/hosted/images/43/711600b41f11e795a495579b497758/Heart-Dumbbell-Icon.png" alt="gym"class="logo">
   <h1>Login</h1>
   {% if error %}
     <p class=error><strong>Error:</strong> {{ error }}
   {% endif %}
-  <form method=post>
+  <form class ="log" method=post>
     <dl>
       <dt>Username:
       <dd><input type=text name=username value="{{

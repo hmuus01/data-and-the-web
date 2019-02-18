@@ -12,9 +12,9 @@ def index():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'hamze' or \
-                request.form['password'] != 'hmuus001':
-            error = 'Invalid credentials'
+        if request.form['username'] != 'hamze' or request.form['password'] != 'hmuus001':
+            error = 'Inval'
+            flash('ERROR!!')
         else:
             flash('You were successfully logged in')
             return render_template('welcome.html')
@@ -28,4 +28,3 @@ def hello(name=None):
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0',port=8000)
-
