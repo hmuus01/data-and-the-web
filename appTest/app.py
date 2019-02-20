@@ -82,18 +82,24 @@ def register():
         #Create cursor
         cur = mysql.connection.cursor()
         
-        # Execute query
-        cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
+         # Get user by username
+        result = cur.execute("SELECT * FROM users WHERE username = %s", [username]) 
+        if result > 0:
+            flash('USERNAME ALREADY TAKEN','danger')
+            return render_template('register.html',form=form) 
+        else:      
+            # Execute query
+            cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
         
-         # Commit to DB
-        mysql.connection.commit()
+            # Commit to DB
+            mysql.connection.commit()
 
-        # Close connection
-        cur.close()
+            # Close connection
+            cur.close()
         
-        flash('You are now registered and can log in', 'success')
+            flash('You are now registered and can log in', 'success')
 
-        return render_template('home.html')
+            return render_template('home.html')
     return render_template('register.html', form=form)
 
 
@@ -227,6 +233,10 @@ def edit_article(id):
     # Populate article form fields
     form.title.data = article['title']
     form.body.data = article['body']
+    
+    if article['author'] != session ['username']:
+        flash('Access Unauthorized','danger')
+        return redirect('usr/289/')
 
     if request.method == 'POST' and form.validate():
         title = request.form['title']
