@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash,request, redirect, url_for, session, logging
+from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
 from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
@@ -18,6 +18,20 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
 #Articles = Articles()
+####################################
+class Gym:
+    def __init__(self, key, name, lat, lng):
+        self.key  = key
+        self.name = name
+        self.lat  = lat
+        self.lng = lng
+
+gyms = (
+    Gym('12x3',      '12x3 Aldgate East',   51.514425, -0.0712606),
+    Gym('stanley', 'Stanley Middle',            37.8884474, -122.1155922),
+    Gym('wci',     'Walnut Creek Intermediate', 37.9093673, -122.0580063)
+)
+gyms_by_key = {gym.key: gym for gym in gyms}
 
 
 @app.route('/')
@@ -27,8 +41,16 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
-
+    return render_template('about.html',gyms=gyms)
+################################################################
+@app.route("/<school_code>")
+def show_school(school_code):
+    gym = gyms_by_key.get(school_code)
+    if gym:
+        return render_template('map.html', gym=gym)
+    else:
+        abort(404)
+###############################################################
 @app.route('/articles')
 def articles():
     # Create cursor
@@ -46,6 +68,20 @@ def articles():
         return render_template('articles.html', msg=msg)
     # Close connection
     cur.close()
+@app.route('/find', methods=['GET', 'POST'])
+def find():
+    if request.method == 'POST':
+        destination = request.form['destination']
+        return redirect('usr/289/find/'+str(destination))
+    return render_template('find.html')
+#Find Gym
+@app.route('/find/<name>', methods=['GET', 'POST'])
+def findgym(name=None):
+    if request.method == 'POST':
+        destination = request.form['destination']
+        return redirect('usr/289/find/'+str(destination))
+    return render_template('find.html', name=name)
+
 #Single Article
 @app.route('/article/<string:id>/')
 def article(id):
