@@ -3,6 +3,7 @@
 {% block body %}
 <h1>Find Gym</h1>
 <form action="" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <div class="form-group">
       <label>Search</label>
       <input type="text" name="destination" class="form-control" value="{{request.form.destination}}">

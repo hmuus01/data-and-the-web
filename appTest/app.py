@@ -1,4 +1,5 @@
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
+from flask_wtf.csrf import CSRFProtect
 from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
@@ -6,7 +7,7 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 app = Flask(__name__)
 
-
+csrf = CSRFProtect(app)
 #MySql Confifig
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -16,6 +17,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #Initalise MYSQL
 mysql = MySQL(app)
+
 
 #Articles = Articles()
 ####################################
@@ -165,7 +167,7 @@ def login():
                 session['username'] = username
 
                 flash('You are now logged in', 'success')
-                return render_template('dashboard.html')
+                return redirect('usr/289/dashboard')
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
@@ -320,4 +322,5 @@ def delete_article(id):
 
 if __name__ == '__main__':
     app.secret_key ='secret123'
+    app.WTF_CSRF_SECRET_KEY = 'secret1122'
     app.run(debug=True, host='0.0.0.0', port=8000)
