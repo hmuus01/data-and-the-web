@@ -5,6 +5,7 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+from flask import jsonify
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
@@ -319,6 +320,21 @@ def delete_article(id):
 
     return redirect('usr/289/dashboard')
 
+@app.route('/api')
+@app.route('/api/<author>')
+def api(author=None):
+    if author:
+        cur = mysql.connection.cursor()
+        result = cur.execute("SELECT * FROM articles WHERE author = %s", [author])
+        articles = cur.fetchall()
+        cur.close()
+        return jsonify({'Reviews':articles})
+    else:
+        cur = mysql.connection.cursor()
+        result = cur.execute("SELECT * FROM articles")
+        articles = cur.fetchall()
+        cur.close()
+        return jsonify({'Reviews':articles})
 
 if __name__ == '__main__':
     app.secret_key ='secret123'
