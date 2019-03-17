@@ -320,6 +320,7 @@ def delete_article(id):
 
     return redirect('usr/289/dashboard')
 
+
 @app.route('/api')
 @app.route('/api/<author>')
 def api(author=None):
