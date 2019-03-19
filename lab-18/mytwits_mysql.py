@@ -20,7 +20,7 @@ login_manager = LoginManager()
 app = Flask(__name__)
 # configure the sqlalchenmy database URI that is used for the connection
 # see http://flask-sqlalchemy.pocoo.org/2.3/config/
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mytwits_user:mytwits_password@localhost/mytwits'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:04750196@localhost/mytwits'
 app.config['SQLALCHEMY_ECHO'] = False
 # initialise the sqlalchemy database connection
 db.init_app(app)
