@@ -6,14 +6,10 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 from flask import jsonify
-
-#Flask restful imports
-from flask_restful import Api, Resource
-from flask_restful import fields, marshal_with
-from flask_restful import reqparse
-
-#Initialise app
 app = Flask(__name__)
+
+#import forms
+from forms import *
 
 csrf = CSRFProtect(app)
 #MySql Confifig
@@ -26,69 +22,9 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #Initalise MYSQL
 mysql = MySQL(app)
 
-api = Api(app)
 
-#Initialise Resource Fields
-resource_fields = {
-    'id': fields.Integer,
-    'title': fields.String,
-    'author': fields.String,
-    'body': fields.String, 
-    'date': fields.DateTime(dt_format='rfc822')
-}
-
-#Request Parser for the api
-parser = reqparse.RequestParser()
-parser.add_argument('id',type=int,help='id of article; must be an integer')
-parser.add_argument('title', type=str, help='name of article; a string')
-parser.add_argument('author', type=str, help='name of author; must be string')
-parser.add_argument('body', type=str, help='body of text, must be a string')
-
-#Retrieve articles using Api class
-class RetrieveArticlesApi(Resource):
-        #output filter decorator
-        @marshal_with(resource_fields)
-        def get(self,id):
-                #Create the cursor
-                cur = mysql.connection.cursor()
-                #retrieve articles
-                result = cur.execute("SELECT * FROM articles WHERE id=%s", [id])
-                #fetch article
-                article = cur.fetchone()
-                #close the cursor/connection
-                cur.close()
-                #Return
-                return article
-        
-        #output filter decorator
-        @marshal_with(resource_fields)
-        def delete(self,id):
-            #Create the cursor
-            cur = mysql.connection.cursor()
-            # Execute deletion of articles
-            result = cur.execute("DELETE FROM articles WHERE id=%s", [id])
-            # Commit DB 
-            mysql.connection.commit()
-            # Close connection
-            cur.close()
-
-        def post(self, id):
-            #Create the cursor
-            cur = mysql.connection.cursor()
-            # Retrieve articles
-            result = cur.execute("SELECT * FROM articles")
-            #fetch all articles
-            article = cur.fetchall()
-            #close the cursor/connection
-            cur.close()
-            #return
-            return article
-
-# API routes
-api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>') 
-                
+#Articles = Articles()
 ####################################
-
 
 
 @app.route('/')
@@ -98,15 +34,9 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html',gyms=gyms)
 ################################################################
-@app.route("/<school_code>")
-def show_school(school_code):
-    gym = gyms_by_key.get(school_code)
-    if gym:
-        return render_template('map.html', gym=gym)
-    else:
-        abort(404)
+
 ###############################################################
 @app.route('/articles')
 def articles():
@@ -152,15 +82,6 @@ def article(id):
 
     return render_template('article.html', article=article) 
 
-class RegisterForm(Form):
-    name = StringField('Name', [validators.Length(min=1, max=50)])
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=6, max=50)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-     ])
-    confirm = PasswordField('Confirm Password')
 
 #Register a user 
 @app.route('/register', methods=['GET', 'POST'])
@@ -276,10 +197,6 @@ def dashboard():
     # Close connection
     cur.close()
 
-# Article Form Class
-class ArticleForm(Form):
-    title = StringField('Title', validators = [validators.DataRequired()])
-    body = TextAreaField('Body', validators =  [validators.DataRequired()])
 
 # Add Article
 @app.route('/add_article', methods=['GET', 'POST'])

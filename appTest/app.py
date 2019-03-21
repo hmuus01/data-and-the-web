@@ -6,6 +6,8 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 from flask import jsonify
+from flask_restful import Api
+from flask_restful import Resource
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
@@ -19,6 +21,8 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #Initalise MYSQL
 mysql = MySQL(app)
 
+#Initialise api
+api = Api(app)
 
 #Articles = Articles()
 ####################################

@@ -6,13 +6,6 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 from flask import jsonify
-
-#Flask restful imports
-from flask_restful import Api, Resource
-from flask_restful import fields, marshal_with
-from flask_restful import reqparse
-
-#Initialise app
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
@@ -26,69 +19,22 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #Initalise MYSQL
 mysql = MySQL(app)
 
-api = Api(app)
 
-#Initialise Resource Fields
-resource_fields = {
-    'id': fields.Integer,
-    'title': fields.String,
-    'author': fields.String,
-    'body': fields.String, 
-    'date': fields.DateTime(dt_format='rfc822')
-}
-
-#Request Parser for the api
-parser = reqparse.RequestParser()
-parser.add_argument('id',type=int,help='id of article; must be an integer')
-parser.add_argument('title', type=str, help='name of article; a string')
-parser.add_argument('author', type=str, help='name of author; must be string')
-parser.add_argument('body', type=str, help='body of text, must be a string')
-
-#Retrieve articles using Api class
-class RetrieveArticlesApi(Resource):
-        #output filter decorator
-        @marshal_with(resource_fields)
-        def get(self,id):
-                #Create the cursor
-                cur = mysql.connection.cursor()
-                #retrieve articles
-                result = cur.execute("SELECT * FROM articles WHERE id=%s", [id])
-                #fetch article
-                article = cur.fetchone()
-                #close the cursor/connection
-                cur.close()
-                #Return
-                return article
-        
-        #output filter decorator
-        @marshal_with(resource_fields)
-        def delete(self,id):
-            #Create the cursor
-            cur = mysql.connection.cursor()
-            # Execute deletion of articles
-            result = cur.execute("DELETE FROM articles WHERE id=%s", [id])
-            # Commit DB 
-            mysql.connection.commit()
-            # Close connection
-            cur.close()
-
-        def post(self, id):
-            #Create the cursor
-            cur = mysql.connection.cursor()
-            # Retrieve articles
-            result = cur.execute("SELECT * FROM articles")
-            #fetch all articles
-            article = cur.fetchall()
-            #close the cursor/connection
-            cur.close()
-            #return
-            return article
-
-# API routes
-api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>') 
-                
+#Articles = Articles()
 ####################################
+class Gym:
+    def __init__(self, key, name, lat, lng):
+        self.key  = key
+        self.name = name
+        self.lat  = lat
+        self.lng = lng
 
+gyms = (
+    Gym('12x3',      '12x3 Aldgate East',   51.514425, -0.0712606),
+    Gym('stanley', 'Stanley Middle',            37.8884474, -122.1155922),
+    Gym('wci',     'Walnut Creek Intermediate', 37.9093673, -122.0580063)
+)
+gyms_by_key = {gym.key: gym for gym in gyms}
 
 
 @app.route('/')
@@ -98,7 +44,7 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html',gyms=gyms)
 ################################################################
 @app.route("/<school_code>")
 def show_school(school_code):
