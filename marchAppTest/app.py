@@ -1,13 +1,11 @@
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
 from flask_wtf.csrf import CSRFProtect
-#from data import Articles
+from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 from flask import jsonify
-
-from forms import *
 
 #Flask restful imports
 from flask_restful import Api, Resource
@@ -154,6 +152,15 @@ def article(id):
 
     return render_template('article.html', article=article) 
 
+class RegisterForm(Form):
+    name = StringField('Name', [validators.Length(min=1, max=50)])
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    email = StringField('Email', [validators.Length(min=6, max=50)])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+     ])
+    confirm = PasswordField('Confirm Password')
 
 #Register a user 
 @app.route('/register', methods=['GET', 'POST'])
@@ -268,6 +275,11 @@ def dashboard():
         return render_template('dashboard.html', msg=msg)
     # Close connection
     cur.close()
+
+# Article Form Class
+class ArticleForm(Form):
+    title = StringField('Title', validators = [validators.DataRequired()])
+    body = TextAreaField('Body', validators =  [validators.DataRequired()])
 
 # Add Article
 @app.route('/add_article', methods=['GET', 'POST'])
