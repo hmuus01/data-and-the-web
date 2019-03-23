@@ -102,13 +102,7 @@ def index():
 def about():
     return render_template('about.html')
 ################################################################
-@app.route("/<school_code>")
-def show_school(school_code):
-    gym = gyms_by_key.get(school_code)
-    if gym:
-        return render_template('map.html', gym=gym)
-    else:
-        abort(404)
+
 ###############################################################
 @app.route('/articles')
 def articles():
