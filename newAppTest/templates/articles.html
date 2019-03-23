@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block body %}
-   <h1>Articles/Forum about peoples Journey</h1>
-    <ul class="list-group">
+   <h1>Articles/Forum</h1>
+<ul class="list-group">
       {% for article in articles %}
-        <li class="list-group-item"><a href="article/{{article.id}}">{{article.title}}</a></li>
+        <li class="list-group-item"><a href="article/{{article.id}}">{{article.title}} | by {{article.author}}</a></li>
     {% endfor %}
-    </ul>
+    </ul>    
 {% endblock %}

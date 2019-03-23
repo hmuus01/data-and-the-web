@@ -1,3 +1,8 @@
+<!-- This html file is a form helper and it is in the form of a macro. 
+    The field labels whill be shown 
+    if there are errors in the field then the errors will be shown inline using the bootstrap class
+    
+ -->
 {% macro render_field(field) %}
   {{ field.label }}
   {{ field(**kwargs)|safe }}

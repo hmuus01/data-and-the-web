@@ -1,5 +1,8 @@
+<!-- extends the basic layout from base.html -->
 {% extends 'base.html' %}
-
+<!-- This html file uses bootstrap to create the div classes for the wtf registration form fields. 
+    The forms created are name, email, username, password, confirm and a button to save the details
+-->
 {% block body %}
   <h1>Register</h1>
   {% from "includes/_formhelpers.html" import render_field %}

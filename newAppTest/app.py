@@ -1,11 +1,17 @@
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
+#import csrf for protection for my app
 from flask_wtf.csrf import CSRFProtect
+#import mysql for the database
 from flask_mysqldb import MySQL
+#import wtf-forms for the registration and login forms
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+#import passlib.hash for protection of user passwords which hash's and uses salt
 from passlib.hash import sha256_crypt
+#import wraps which is used will be used in function to check if user is logged in
 from functools import wraps
+#import jsonify for the api
 from flask import jsonify
-
+#import the form classes from forms.py
 from forms import *
 
 #Flask restful imports
@@ -34,7 +40,7 @@ resource_fields = {
     'id': fields.Integer,
     'title': fields.String,
     'author': fields.String,
-    'body': fields.String, 
+    'body': fields.String,
     'date': fields.DateTime(dt_format='rfc822')
 }
 
@@ -60,7 +66,7 @@ class RetrieveArticlesApi(Resource):
                 cur.close()
                 #Return
                 return article
-        
+
         #output filter decorator
         @marshal_with(resource_fields)
         def delete(self,id):
@@ -68,7 +74,7 @@ class RetrieveArticlesApi(Resource):
             cur = mysql.connection.cursor()
             # Execute deletion of articles
             result = cur.execute("DELETE FROM articles WHERE id=%s", [id])
-            # Commit DB 
+            # Commit DB
             mysql.connection.commit()
             # Close connection
             cur.close()
@@ -85,7 +91,7 @@ class RetrieveArticlesApi(Resource):
             #return
             return article
 
-# API routes
+# API route
 api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>') 
                 
 ####################################
@@ -93,7 +99,7 @@ api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>')
 
 
 @app.route('/')
-def index():
+def home():
     return render_template('home.html')
 
 
@@ -151,23 +157,32 @@ def article(id):
 #Register a user 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    #Form variable which is set to the RegisterForm which was created in the class RegisterForm
     form = RegisterForm(request.form)
+    #Check if the request to the route is GET or POST and the form data validates 
     if request.method == 'POST' and form.validate():
+        #store the form name submitted to the variable name
         name = form.name.data
+        #store the form submitted in the email field in the variable email
         email = form.email.data
+        #store the username the user creats in the username variable
         username = form.username.data
+        #Hash and salt the password the user enters and store in the password variable
         password = sha256_crypt.encrypt(str(form.password.data))
              
         #Create cursor
         cur = mysql.connection.cursor()
         
-         # Get user by username
+         # Get the  user by username and store in result
         result = cur.execute("SELECT * FROM users WHERE username = %s", [username]) 
+        #check if the username is taken
         if result > 0:
+            #if the username is taken let the user know
             flash('USERNAME ALREADY TAKEN','danger')
+            #redirect the user to the register page
             return render_template('register.html',form=form) 
         else:      
-            # Execute query
+            # Execute query to store the registration in the database
             cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
         
             # Commit to DB
@@ -175,9 +190,9 @@ def register():
 
             # Close connection
             cur.close()
-        
+            #flash meessage to let the user know they've been registered
             flash('You are now registered and can log in', 'success')
-
+            #redirect the user to the homepage
             return render_template('home.html')
     return render_template('register.html', form=form)
 
