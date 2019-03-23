@@ -1,6 +1,5 @@
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
 from flask_wtf.csrf import CSRFProtect
-#from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
@@ -14,7 +13,7 @@ from flask_restful import Api, Resource
 from flask_restful import fields, marshal_with
 from flask_restful import reqparse
 
-#Initialise app
+#Create Instance of Flask class/ place holder for the current module
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
