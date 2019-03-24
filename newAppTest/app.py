@@ -3,6 +3,8 @@ from flask import Flask, render_template, flash,request, redirect, url_for, sess
 from flask_wtf.csrf import CSRFProtect
 #import mysql for the database
 from flask_mysqldb import MySQL
+#import sql_ alchemy
+from flask_sqlalchemy import SQLAlchemy
 #import wtf-forms for the registration and login forms
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 #import passlib.hash for protection of user passwords which hash's and uses salt
@@ -14,6 +16,7 @@ from flask import jsonify
 #import the form classes from forms.py
 from forms import *
 
+
 #Flask restful imports
 from flask_restful import Api, Resource
 from flask_restful import fields, marshal_with
@@ -22,8 +25,10 @@ from flask_restful import reqparse
 #Create Instance of Flask class/ place holder for the current module
 app = Flask(__name__)
 
+#wrap the app with csrf protection
 csrf = CSRFProtect(app)
 #MySql Configurations
+
 #Name of host to connect to
 app.config['MYSQL_HOST'] = 'localhost'
 #User to authenticate as which is set to root
