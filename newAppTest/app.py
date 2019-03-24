@@ -23,11 +23,16 @@ from flask_restful import reqparse
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
-#MySql Confifig
+#MySql Configurations
+#Name of host to connect to
 app.config['MYSQL_HOST'] = 'localhost'
+#User to authenticate as which is set to root
 app.config['MYSQL_USER'] = 'root'
+#password to authenticate with
 app.config['MYSQL_PASSWORD'] = '04750196'
+#database to use
 app.config['MYSQL_DB'] = 'myFlaskapp'
+#Cursor class
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #Initalise MYSQL
@@ -56,7 +61,7 @@ class RetrieveArticlesApi(Resource):
         #output filter decorator
         @marshal_with(resource_fields)
         def get(self,id):
-                #Create the cursor
+                #Create the cursor which operates as a handler to handle queries
                 cur = mysql.connection.cursor()
                 #retrieve articles
                 result = cur.execute("SELECT * FROM articles WHERE id=%s", [id])
@@ -93,32 +98,27 @@ class RetrieveArticlesApi(Resource):
 
 # API route
 api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>') 
-                
-####################################
-
-
-
+#Route for the homepage
 @app.route('/')
 def home():
     return render_template('home.html')
 
-
+#Route for the about page
 @app.route('/about')
 def about():
     return render_template('about.html')
-################################################################
 
-###############################################################
+#route for the forum/articles for all users
 @app.route('/articles')
 def articles():
-    # Create cursor
+    # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
-    # Get articles
+    # Get all articles
     result = cur.execute("SELECT * FROM articles")
-
+    #fetch all articles
     articles = cur.fetchall()
-
+    #check if there are any articles if there are not print message to the user to let them know
     if result > 0:
         return render_template('articles.html', articles=articles)
     else:
@@ -126,12 +126,15 @@ def articles():
         return render_template('articles.html', msg=msg)
     # Close connection
     cur.close()
+
+#route to find Boxing Gyms
 @app.route('/find', methods=['GET', 'POST'])
 def find():
     if request.method == 'POST':
         destination = request.form['destination']
         return redirect('usr/289/find/'+str(destination))
     return render_template('find.html')
+
 #Find Gym
 @app.route('/find/<name>', methods=['GET', 'POST'])
 def findgym(name=None):
@@ -143,7 +146,7 @@ def findgym(name=None):
 #Single Article
 @app.route('/article/<string:id>/')
 def article(id):
-    # Create cursor
+    # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
     # Get article
@@ -170,7 +173,7 @@ def register():
         #Hash and salt the password the user enters and store in the password variable
         password = sha256_crypt.encrypt(str(form.password.data))
              
-        #Create cursor
+        #Create cursor which operates as a handler and handles queries
         cur = mysql.connection.cursor()
         
          # Get the  user by username and store in result
@@ -185,7 +188,7 @@ def register():
             # Execute query to store the registration in the database
             cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
         
-            # Commit to DB
+            # Commit to the database
             mysql.connection.commit()
 
             # Close connection
@@ -200,12 +203,13 @@ def register():
 # Login a User
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    #check if the request to the route is a POST method
     if request.method == 'POST':
         # Get Form Fields
         username = request.form['username']
         password_candidate = request.form['password']
 
-        # Create cursor
+        # Create cursor which operates as a handler and handles queries
         cur = mysql.connection.cursor()
 
         # Get user by username
@@ -259,7 +263,7 @@ def logout():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    # Create cursor
+    # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
     # Get articles
@@ -286,7 +290,7 @@ def add_article():
         title = form.title.data
         body = form.body.data
         
-        # Create Cursor
+        # Create Cursor which operates as a handler and handles queries
         cur = mysql.connection.cursor()
 
         # Execute
@@ -308,7 +312,7 @@ def add_article():
 @app.route('/edit_article/<string:id>', methods=['GET', 'POST'])
 @is_logged_in
 def edit_article(id):
-    # Create cursor
+    # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
     # Get article by id
@@ -331,7 +335,7 @@ def edit_article(id):
         title = request.form['title']
         body = request.form['body']
 
-        # Create Cursor
+        # Create Cursor which operates as a handler and handles queries
         cur = mysql.connection.cursor()
         app.logger.info(title)
         # Execute
@@ -354,7 +358,7 @@ def edit_article(id):
 @app.route('/delete_article/<string:id>', methods=['POST'])
 @is_logged_in
 def delete_article(id):
-    # Create cursor
+    # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
     # Execute
@@ -370,7 +374,7 @@ def delete_article(id):
 
     return redirect('usr/289/dashboard')
 
-
+#route for the api
 @app.route('/api')
 @app.route('/api/<author>')
 def api(author=None):
