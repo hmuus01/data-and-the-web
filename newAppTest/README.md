@@ -1,5 +1,5 @@
 | APP CRITERIA | DESCRIPTION | LINES |
-| --- | --- |
+| --- | --- | --- |
 | 1 : It is a flask app |#|#|
 | 2 : There is more than one route and more than one view |#|#|
 | 3 : The html is rendered using jinja templates|#|#|
