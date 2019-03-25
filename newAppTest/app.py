@@ -1,3 +1,4 @@
+#flask imports
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
 #import csrf for protection for my app
 from flask_wtf.csrf import CSRFProtect
@@ -148,17 +149,17 @@ def findgym(name=None):
         return redirect('usr/289/find/'+str(destination))
     return render_template('find.html', name=name)
 
-#Single Article
+#Single Article app route
 @app.route('/article/<string:id>/')
 def article(id):
     # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
 
-    # Get article
+    # Get article by article
     result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
-
+    #fetch one article
     article = cur.fetchone()
-
+    #render the article html page
     return render_template('article.html', article=article) 
 
 
@@ -167,7 +168,7 @@ def article(id):
 def register():
     #Form variable which is set to the RegisterForm which was created in the class RegisterForm
     form = RegisterForm(request.form)
-    #Check if the request to the route is GET or POST and the form data validates 
+    #Check if the request to the route is POST and the form data validates 
     if request.method == 'POST' and form.validate():
         #store the form name submitted to the variable name
         name = form.name.data
@@ -219,21 +220,22 @@ def login():
 
         # Get user by username
         result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
-
+        #check if the username exits
         if result > 0:
             # Get stored hash
             data = cur.fetchone()
             password = data['password']
 
-            # Compare Passwords
+            # Compare the Passwords, the password the user enters in the form and the stored password
             if sha256_crypt.verify(password_candidate, password):
-                # Passed
+                # if the passwords are the same, start session
                 session['logged_in'] = True
                 session['username'] = username
-
+                #Notify the user they are logged in
                 flash('You are now logged in', 'success')
                 return redirect('usr/289/dashboard')
             else:
+                #else let the user know they entered incorrect details
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
             # Close connection
@@ -244,7 +246,7 @@ def login():
 
     return render_template('login.html')
 
-# Check if user logged in
+#Function to check if user logged in
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -256,16 +258,21 @@ def is_logged_in(f):
     return wrap
 
 
-#logout
+#logout app route
 @app.route('/logout')
+#only show if user is logged in
 @is_logged_in
 def logout():
+    #on logout clear the session
     session.clear()
+    #notify the user they are now logged out
     flash('You are now logged out', 'success')
+    #redirect the user to the login page
     return redirect("http://www.doc.gold.ac.uk/usr/289/login")
 
-# Dashboard
+# Dashboard app route
 @app.route('/dashboard')
+#only show if user is logged in
 @is_logged_in
 def dashboard():
     # Create cursor which operates as a handler and handles queries
@@ -275,12 +282,13 @@ def dashboard():
     #result = cur.execute("SELECT * FROM articles")
     # Show articles only from the user logged in 
     result = cur.execute("SELECT * FROM articles WHERE author = %s", [session['username']])
-
+    #get all articles
     articles = cur.fetchall()
-
+    #if there are articles found redirect the user to the dashboard page 
     if result > 0:
         return render_template('dashboard.html', articles=articles)
     else:
+        #else notify the user there are no articles
         msg = 'No Articles Found'
         return render_template('dashboard.html', msg=msg)
     # Close connection
@@ -291,14 +299,16 @@ def dashboard():
 @is_logged_in
 def add_article():
     form = ArticleForm(request.form)
+    #Check if the request to the route is POST and the form data validates
     if request.method == 'POST' and form.validate():
+        #if so, store the information submitted in the title and body variables
         title = form.title.data
         body = form.body.data
         
         # Create Cursor which operates as a handler and handles queries
         cur = mysql.connection.cursor()
 
-        # Execute
+        # Execute sql command adding an article to the database under the logged in user's name
         cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)",(title, body, session['username']))
 
         # Commit to DB
@@ -306,11 +316,10 @@ def add_article():
 
         #Close connection
         cur.close()
-
+        #notify the user an article has been created
         flash('Article Created', 'success')
-
+        #redirect the user to the dashboard
         return redirect('http://www.doc.gold.ac.uk/usr/289/dashboard')
-
     return render_template('add_article.html', form=form)
 
 # Edit Article
@@ -322,20 +331,21 @@ def edit_article(id):
 
     # Get article by id
     result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
-
+    #retrive one article
     article = cur.fetchone()
+    #close the connection
     cur.close()
     # Get form
     form = ArticleForm(request.form)
-
     # Populate article form fields
     form.title.data = article['title']
     form.body.data = article['body']
-    
+    #if the author is not the user logged in then do not give them access to edit the article
     if article['author'] != session ['username']:
         flash('Access Unauthorized','danger')
+        #redirect the user to the homepage
         return redirect('usr/289/')
-
+    #Check if the request to the route is POST and the form data validates
     if request.method == 'POST' and form.validate():
         title = request.form['title']
         body = request.form['body']
@@ -350,9 +360,9 @@ def edit_article(id):
 
         #Close connection
         cur.close()
-
+        #notify the user the article was updated
         flash('Article Updated', 'success')
-
+        #redirect the user to the dashboard
         return redirect('usr/289/dashboard')
 
     return render_template('edit_article.html', form=form)
@@ -374,7 +384,7 @@ def delete_article(id):
 
     #Close connection
     cur.close()
-
+    #let the user know that an article was deleted
     flash('Article Deleted', 'success')
 
     return redirect('usr/289/dashboard')
