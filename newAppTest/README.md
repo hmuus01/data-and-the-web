@@ -7,7 +7,19 @@ Link: http://doc.gold.ac.uk/usr/289/
 
 
 
-
+**SUBMISSION:**
+ 
+| **SUBMISSION INSTRUCTIONS** | **COMPLETE/NOT COMPLETE** |
+| --- | --- |
+| App run's without debug=True |  ✔ |
+| Your app process should run in the background: use 'python3 YOUR-APP-NAME &' | ✔ |
+| The url for your app should be in a README.txt | ✔ |
+| Any login credentials should be in the README | ✔ |
+| You should include a clear statement in the README submitted that describes what you have done | ✔ |
+| Your app should be in the top level of your repo in "my app" subdirectory | ✔ |
+| All the rest of your code for the term should be in subdirectories (lab-12, lab-13, ...) | ✔ |
+| You should give master access to your repo to the following gitlab accounts: @ehoma001 and TAs (I will announce their gitlab accounts later) | ✔ |
+| Check this page before submission not missing any updates on this page |  ✔  |
 
 
 
