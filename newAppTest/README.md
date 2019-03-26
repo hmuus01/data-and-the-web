@@ -9,12 +9,12 @@
 | 7 : There are useful feedback messages to the user|I used several flash statements which alert the user if their login credentials do not match, if no article is found and if the username they pick on registration is taken. |#|
 | 8 : It has a database backend that implemenets CRUD operations|For my database I am using MySQL and in order to satisfy the CRUD operations, I can create a user/article, read an article, update an article and delete an article and the changes can be seen in the database|#|
 | 9 : The create and update operations take input data from a form|In my add_article and edit_article methods, you can see that title and body of the articles submitted are taken from the form data.|#|
-| 10 : There is user authentication|#|#|
-| 11 : The login process uses sessions|#|#|
-| 12 : Passwords are stored as hashes|#|#|
-| 13 : There is a way to logout|#|#|
-| 14 : There is a basic API. Content can be accessed as json via http methods|#|#|
-| 15 : It should be clear how to access the API|#|#|
+| 10 : There is user authentication|In the login method the user is not granted access if the password in the database and the password the user enters do not match also a user cannot edit an article which is not theirs, this can be seen in the edit_article method |#|
+| 11 : The login process uses sessions|| Once the password in the database and the password the user enters match, a session created |#|
+| 12 : Passwords are stored as hashes|Passwords are hashed on registration using the passlib.hash library and sha256_crypt|#|
+| 13 : There is a way to logout|I have implemented a logout method which clears the session and redirects the user to the login page|#|
+| 14 : There is a basic API. Content can be accessed as json via http methods|I have implemented the basic API which allows one to view all the articles and the authors and date and time created|#|
+| 15 : It should be clear how to access the API|You can access the basic API by going to the home page and clicking on the api link.|#|
 
 
 | Extensions for My APP | DESCRIPTION |
