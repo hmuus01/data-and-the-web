@@ -1,3 +1,17 @@
+**Data and The Web - Final Submission - My APP - HAMZE MUUSE**
+
+**URL for My APP** 
+--> Will only work once you run app.py on the terminal
+
+Link: http://doc.gold.ac.uk/usr/289/
+
+
+
+
+
+
+
+
 | APP CRITERIA | DESCRIPTION | LINES | COMPLETE/NOT COMPLETE |
 | --- | --- | --- |--|
 | 1 : It is a flask iapp |I have used the flask micro framework in this web application and you can see this with the use of the flask class and the use of the instance of this class with "app = Flask(__name__)”|#|✔|
