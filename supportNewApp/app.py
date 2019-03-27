@@ -252,7 +252,7 @@ def login():
 #logout app route
 @app.route('/logout')
 #only show if user is logged in
-@is_logged_in
+@check_user_logged_in
 def logout():
     #on logout clear the session
     session.clear()
@@ -264,7 +264,7 @@ def logout():
 # Dashboard app route
 @app.route('/dashboard')
 #only show if user is logged in
-@is_logged_in
+@check_user_logged_in
 def dashboard():
     # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
@@ -287,7 +287,7 @@ def dashboard():
 
 # Add Article
 @app.route('/add_article', methods=['GET', 'POST'])
-@is_logged_in
+@check_user_logged_in
 def add_article():
     form = ArticleForm(request.form)
     #Check if the request to the route is POST and the form data validates
@@ -315,7 +315,7 @@ def add_article():
 
 # Edit Article
 @app.route('/edit_article/<string:id>', methods=['GET', 'POST'])
-@is_logged_in
+@check_user_logged_in
 def edit_article(id):
     # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()
@@ -362,7 +362,7 @@ def edit_article(id):
 
 # Delete Article
 @app.route('/delete_article/<string:id>', methods=['POST'])
-@is_logged_in
+@check_user_logged_in
 def delete_article(id):
     # Create cursor which operates as a handler and handles queries
     cur = mysql.connection.cursor()

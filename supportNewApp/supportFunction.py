@@ -3,7 +3,7 @@ from functools import wraps
 #flask imports
 from flask import Flask, render_template, flash,request, redirect, url_for, session, logging,abort
 #Function to check if user logged in
-def is_logged_in(f):
+def check_user_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
