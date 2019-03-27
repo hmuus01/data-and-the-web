@@ -25,7 +25,7 @@ ________________________
 
 
 | APP CRITERIA | DESCRIPTION | FILENAME & LINES | COMPLETE/NOT COMPLETE |
-| --- | --- | --- |-|
+| --- | --- | ---- |-|
 | 1 : It is a flask iapp |I have used the flask micro framework in this web application and you can see this with the use of the flask class and the use of the instance of this class with "app = Flask(__name__)”|app.py, Line 2|✔|
 | 2 : There is more than one route and more than one view |I have used multiple routes in my web application some examples include @app.route(‘/’), @app.route(‘about’), @app.route(‘find’) etc.|`app.py`, [`Line 108`](shorturl.at/pwQW8)[`Line 113`](shorturl.at/muJW4)[`Line137`](shorturl.at/iABS0)|✔|
 | 3 : The html is rendered using jinja templates|I have rendered my html pages using jinja, you can see this with the use of ‘{%block body%} and {% if name %} in my about.html and find.html pages among other pages in my app. |#|✔|
