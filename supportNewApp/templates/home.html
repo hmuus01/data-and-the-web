@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1><span style="color:#000000">Gym</span><span style="color:#ffbf00">Bud</span></h1>
+     <p class="lead">This is a website to help you on your road to become healthier by connecting you with local boxing gyms.</p>
+    {% if session.logged_in == NULL %}
+        <div class="container">
+    <img src="https://tinyurl.com/yxbgvk4v" alt="Image" class="image">
+    <div class="overlay">
+        <div class="text">Start Your Fitness Journey</div>
+        </div>
+    </div>
+      <a href="/register" class="btn btn-primary btn-lg">Register</a>
+      <a href="/login" class="btn btn-success btn-lg">Login</a>
+    {% endif %}
+  </div> 
+{% endblock %}

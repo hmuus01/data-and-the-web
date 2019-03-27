@@ -5,7 +5,7 @@
 
 Link: http://doc.gold.ac.uk/usr/289/
 
-**Link to all my commits** : https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/commits/master
+
 
 **SUBMISSION:**
  
@@ -24,9 +24,9 @@ Link: http://doc.gold.ac.uk/usr/289/
 
 
 
-| APP CRITERIA | DESCRIPTION | FILENAME & LINES | COMPLETE/NOT COMPLETE |
+| APP CRITERIA | DESCRIPTION | LINES | COMPLETE/NOT COMPLETE |
 | --- | --- | --- |-|
-| 1 : It is a flask iapp |I have used the flask micro framework in this web application and you can see this with the use of the flask class and the use of the instance of this class with "app = Flask(__name__)”|app.py, Line 2|✔|
+| 1 : It is a flask iapp |I have used the flask micro framework in this web application and you can see this with the use of the flask class and the use of the instance of this class with "app = Flask(__name__)”|#|✔|
 | 2 : There is more than one route and more than one view |I have used multiple routes in my web application some examples include @app.route(‘/’), @app.route(‘about’), @app.route(‘find’) etc.|#|✔|
 | 3 : The html is rendered using jinja templates|I have rendered my html pages using jinja, you can see this with the use of ‘{%block body%} and {% if name %} in my about.html and find.html pages among other pages in my app. |#|✔|
 | 4 : The jinja templates include some control structure|If conditional statements have been used in most of my html files an example is the home.html file which uses an if statement to check if a user is logged in or not|#|✔|
