@@ -21,7 +21,7 @@ Link: http://doc.gold.ac.uk/usr/289/
 | You should give master access to your repo to the following gitlab accounts: @ehoma001 and TAs (I will announce their gitlab accounts later) | ✔ |
 | Check this page before submission not missing any updates on this page |  ✔  |
 
-________________________
+_______
 
 
 | APP CRITERIA | DESCRIPTION | FILENAME & LINES | COMPLETE/NOT COMPLETE |
@@ -30,7 +30,7 @@ ________________________
 | 2 : There is more than one route and more than one view |I have used multiple routes in my web application some examples include @app.route(‘/’), @app.route(‘about’), @app.route(‘find’) etc.|`app.py`,[`Line 108`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L108)[`Line113`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L113)[`Line137`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L137)|✔|
 | 3 : The html is rendered using jinja templates|I have rendered my html pages using jinja, you can see this with the use of ‘{%block body%} and {% if name %} in my about.html and find.html pages among other pages in my app. |`about.html`,`find.html`, `home.html` [`Line 4`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/templates/home.html#L4) [`Line 13`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/templates/find.html#L13)|✔|
 | 4 : The jinja templates include some control structure|If conditional statements have been used in most of my html files an example is the home.html file which uses an if statement to check if a user is logged in or not|`home.html` [`Line8`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/templates/home.html#L8)|✔|
-| 5 : It includes one or more forms|I have separated my class which creates the forms and can be found in forms.py. I have created two forms, registration form and article form. |#|✔|
+| 5 : It includes one or more forms|I have separated my class which creates the forms and can be found in forms.py. I have created two forms, registration form and article form. |`forms.py` [`ArticleForm`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/forms.py#L7) [`RegisterForm`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/forms.py#L12)|✔|
 | 6 : The forms have some validation|I have used validation in both of my forms, in the registration form the validators set the minimum and maximum length of the input string. |#|✔|
 | 7 : There are useful feedback messages to the user|I used several flash statements which alert the user if their login credentials do not match, if no article is found and if the username they pick on registration is taken. |#|✔|
 | 8 : It has a database backend that implemenets CRUD operations|For my database I am using MySQL and in order to satisfy the CRUD operations, I can create a user/article, read an article, update an article and delete an article and the changes can be seen in the database|#|✔|
