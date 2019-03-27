@@ -6,8 +6,8 @@ class DBHelper:
 
     def __init__(self):
         self.db = pymysql.connect(host='localhost',
-            user='mytwits_user',
-            passwd='mytwits_password',
+            user='root',
+            passwd='04750196',
             db='mytwits')
 
     def get_user(self, user_id):
