@@ -7,7 +7,7 @@ Link to my web app: http://doc.gold.ac.uk/usr/289/
 
 **Link to all my commits** : https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/commits/master
 
-**I have created my Flask application using the skills I have learnt throughout the Data and the Web module, both in term 1 and term 2. In addition to the module lab content and examples, I have used an online flask tutorial to build an article flask application from scratch. In order to extend on the online tutorial and the templates given to me, I have tried to implement the DRY (Don't Repeat Yourself) principle and separation of concern, by structuring my code in a modular way. I have also improved upon the tutorial by adding access control logic as well as additional security to prevent cross site forgery requests from taking place.**
+**I have created my term 2 Final Flask application using the techniques I have gained over the course of the Data and the Web module, both in term 1 and term 2. With the Knowledge aquired from the lab content and the documentations, I have searched and found resources online one of which is a flask tutorial which is used to build an article flask app (see reference below). In order to extend on the online tutorial and the templates given to me, I have tried to implement the DRY (Don't Repeat Yourself) principle and separation of concern. I have done by seperating my html files, my forms for registrations and to fill an article which will be explained more below and the logic to check if a user is logged in which will also be explained more below. Privacy is key, therefore i have ensured users of my web applications are protected again Cross Site Request Forgery*
 
 **SUBMISSION:**
  
@@ -55,4 +55,6 @@ ________________________________________________________________________________
 | 5 : use of flask-restful is not required but is recommended|`app.py` <br/>[`Lines 22-25`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L22)<br/> [`Line 47`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L47)<br/>[`Line 68`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L68)|I have imported flask-restful and used it to apply the restful api|
 | 6 : Access Control|`app.py`<br/>[`Lines 335-336`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L335) |One of the major changed and additions to my app is access control and making the app secure. One cannot edit or change an article/ forum post they havent written. I check if the user logged in is the one who is accessing the article if its not the access is unauthorized|
 | 7 :SQL Alchemy |#|I have imported SQL Alchemy and have attempted to make it work but unfortunely i was limited by time and it partially passes and not full functional |
+
+
 
