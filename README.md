@@ -48,8 +48,8 @@ _______
 | Extensions for My APP | FILENAME/LINE| DESCRIPTION |
 | --- | --- |---|
 | 1 : using wtforms is not required but is recommended|`forms.py` [`Line 2`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/forms.py#L2) <br/> [`Line 8`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/forms.py#L8)|I have imported and used flask WTF for both my ArticleForm and RegisterForm and have utilised the wtf form validators.|
-| 2 : use of flask-login is not required but is recommended|#|Instead of using flask login I have a method in a separate python file `supportFunction.py` which checks if a user is logged in called def`check_user_logged_in`|
-| 3 : using a salt is not required but is recommended|#|#|
+| 2 : use of flask-login is not required but is recommended|`supportFunction.py` [`Line 6`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/supportFunction.py#L6)|Instead of using flask login I have a method in a separate python file `supportFunction.py` which checks if a user is logged in called def`check_user_logged_in`|
+| 3 : using a salt is not required but is recommended|`app.py`  [`Line 180`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L180)|With the use of sha256_crypt.encrypt() salt is generated and applied on passwords by default|
 | 4 : additional credit will be given for an api that implements get,post,push and delete|#|#|
 | 5 : use of flask-restful is not required but is recommended|#|#|
 | 6 : using sqlalchemy is not required but will attract credit|#|#|
