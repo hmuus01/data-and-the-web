@@ -44,6 +44,7 @@ _______
 | 14 : There is a basic API. Content can be accessed as json via http methods|I have implemented the basic API which allows one to view all the articles and the authors and date and time created|`app.py` [`Line 386`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L386)|✔|
 | 15 : It should be clear how to access the API|You can access the basic API by going to the home page and clicking on the api link.|`app.py` [`Line 384`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L384) `navbar.html` [`Line 28`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/templates/includes/_navbar.html#L28)|✔|
 
+_________
 
 | Extensions for My APP | FILENAME/LINE| DESCRIPTION |
 | --- | --- |---|
