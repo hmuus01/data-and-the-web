@@ -7,7 +7,7 @@ Link to my web app: http://doc.gold.ac.uk/usr/289/
 
 **Link to all my commits** : https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/commits/master
 
-**I have created my Flask application using the skills I have learnt throughout the Data and the Web module, both in term 1 and term 2. In addition to the module lab content and examples, I have used an online flask tutorial to build an article flask application from scratch. In order to extend on the online tutorial and the templates given to me, I have tried to implement a DRY the principle and separation of concern, by structuring my code in a modular way. I have also improved upon the tutorial by adding access control logic as well as additional security to prevent cross site forgery requests from taking place.**
+**I have created my Flask application using the skills I have learnt throughout the Data and the Web module, both in term 1 and term 2. In addition to the module lab content and examples, I have used an online flask tutorial to build an article flask application from scratch. In order to extend on the online tutorial and the templates given to me, I have tried to implement the DRY (Don't Repeat Yourself) principle and separation of concern, by structuring my code in a modular way. I have also improved upon the tutorial by adding access control logic as well as additional security to prevent cross site forgery requests from taking place.**
 
 **SUBMISSION:**
  
@@ -44,7 +44,7 @@ _______
 | 14 : There is a basic API. Content can be accessed as json via http methods|I have implemented the basic API which allows one to view all the articles and the authors and date and time created|`app.py` [`Line 386`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L386)|✔|
 | 15 : It should be clear how to access the API|You can access the basic API by going to the home page and clicking on the api link.|`app.py` [`Line 384`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/app.py#L384) `navbar.html` [`Line 28`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/supportNewApp/templates/includes/_navbar.html#L28)|✔|
 
-_________
+______________________________________________________________________________________________________________________________________________________________________________________________________
 
 | Extensions for My APP | FILENAME/LINE| DESCRIPTION |
 | --- | --- |---|
