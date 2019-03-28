@@ -100,17 +100,14 @@ class RetrieveArticlesApi(Resource):
             # Create Cursor which operates as a handler and handles queries
             cur = mysql.connection.cursor()
             # Execute
-            cur.execute ("UPDATE articles SET title='API EDIT', body=%s WHERE id=%s",(main,id))
+            test = "API Edit"
+            cur.execute ("UPDATE articles SET title=%s, body=%s WHERE id=%s",(test,main,id))
             # Commit to DB
             mysql.connection.commit()
-            # Retrieve articles
-            result = cur.execute("SELECT * FROM articles WHERE id=%s", [id])
-            #fetch all articles
-            article = cur.fetchone()
             #close the cursor/connection
             cur.close()
             #return
-            return article
+            return
 
 # Restful API route
 api.add_resource(RetrieveArticlesApi,'/apirestful/<int:id>') 
