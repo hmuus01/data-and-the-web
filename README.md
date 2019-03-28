@@ -68,5 +68,5 @@ ________________________________________________________________________________
 `curl http://doc.gold.ac.uk/usr/289/apirestful/<ENTER ID TO GET> -X GET`
 
 **PUT** CURL REQUEST
-`curl -d “body = <ENTER TEXT HERE>” http://doc.gold.ac.uk/usr/289/apirestful/<ENTER ID OF ARTICLE TO EDIT> -X PUT -v`
+`curl -d “body=<ENTER TEXT HERE>”http://doc.gold.ac.uk/usr/289/apirestful/<ENTER ID OF ARTICLE TO EDIT> -X PUT -v`
 
