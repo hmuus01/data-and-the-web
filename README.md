@@ -76,7 +76,7 @@ ________________________________________________________________________________
 **References** <br/>
 Below you can find the links i've used to build my flask application. <br/>
 http://flask.pocoo.org/docs/1.0/quickstart/ <br/>
-https://www.youtube.com/watch?v=zRwy8gtgJ1A - This is a video i got the idea from, i have adapted and changed most of the content. Examples of how i changed it is i've applied the dry principle by seperating some of the logic in the python files such as supportFunction.py and also have added both the basic Api and the restful Api as well. To protect against request forgery i have wrapped the whole app with **csrf**. <br/>
+https://www.youtube.com/watch?v=zRwy8gtgJ1A - This is a video i got the idea from, i have adapted and changed most of the content. Examples of how i changed it is i've applied the dry principle by seperating some of the logic in the python files such as supportFunction.py and also have added both the basic Api and the restful Api as well. To protect against request forgery i have wrapped the whole app with **csrf** and rendering every form needs a token. <br/>
 https://flask-mysqldb.readthedocs.io/en/latest/ <br/>
 http://flask.pocoo.org/docs/1.0/patterns/wtforms/ <br/>
 https://flask-wtf.readthedocs.io/en/stable/csrf.html <br/>
@@ -93,4 +93,52 @@ https://flask-wtf.readthedocs.io/en/stable/csrf.html <br/>
 
 **PUT** CURL REQUEST
 `curl -d “body=<ENTER TEXT HERE>”http://doc.gold.ac.uk/usr/289/apirestful/<ENTER ID OF ARTICLE TO EDIT> -X PUT -v`
+
+`Python Files`<br/>
+
+**app.py** <br/>
+This is the main python file in my flask web application which when run using the python3 command displays myapp. It contains all the routing for the numerous webpages, all the flask, decorator and wtforms imports. It also contains the configuration for the MySQL database with localhost as the host, root as the user and MySQL password. 
+
+**forms.py** <br/>
+This python file contains my two form classes article form and register form. From wtforms I use form, StringField, TextAreaField, PasswordField and validators. 
+
+**supportFunction.py** <br/>
+This python file is a decorator and contains the logic to check if a user is logged in. A decorator is a function that wraps and replaces another function.
+This function is called throughout my python application; therefore, I’ve separated it in order to apply the DRY principle and this is also an example of separation of concerns.
+http://flask.pocoo.org/docs/0.12/patterns/viewdecorators/
+
+`Template Directory`<br/>
+
+**about.html** <br/>
+A simple html page which uses inheritance to extend base.html. This page is a description of all files used my web application. 
+
+**add_article.html**<br/>
+A simple html page which extends base.html. it imports `render_field` and uses form to allow a user to enter an article. The forms have to have a token unless the html page will not be rendered. I’ve done this as part of csrf. 
+
+**article.html**<br/>
+A simple html page which extends base.html. This uses jinja control structure just like the other html pages above and displays the author of an article and the date.
+
+**articles.html**<br/>
+A simple html page which extends base.html. By using jinja control structure, it loops through all the articles and displays them with the title and who wrote it. 
+
+**base.html**<br/>
+This is the main html file which is extended in most other html files using inheritance. It contains links to bootstrap used as well as my custom.css and custom fonts used. This page calls the _navbar which is in an _includes directory in a file _navbar.html and displays this navbar in each page of the web app as base.html is extended throughout. 
+
+**dashboard.html**<br/>
+This webpage is basically the users profile page. It contains a table of all the articles of the user and the user is able to edit or delete the articles as they wish. Bootstrap is used on the template. A token is required when editing an article, this is necessary as part of csrf. 
+
+**edit_article.html** <br/>
+A simple html page which extends base.html. which contains a form for the user to enter their changes. A token is also required here. 
+
+**find.html**<br/>
+A simple html page which extends base.html. This is the most fun page as it uses a google iframe to allow users to enter a location of their choice and it finds all boxing gyms around that area and places a google map icon on top of them.
+
+**home.html**<br/>
+This is the homepage which is what the user sees when they first run the app. It contains a welcome message. It checks if a user is logged in using sessions and if they’re not an image which when you hover over says “start your fitness journey” and the links to login and register appear. If they are logged in, then it’s just a message displayed to them. 
+
+**Login.html**<br/>
+This html file contains a form for the user to enter their username and password and a submit button. For the form to actually validate a token is required, this is necessary as part of csrf.
+
+**register.html**<br/>
+This html file also contains a form with the name, email, username, password and confirm field. For the form to actually validate a token is required, this is necessary as part of csrf.
 
