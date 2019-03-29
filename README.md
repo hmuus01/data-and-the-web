@@ -67,12 +67,12 @@ ________________________________________________________________________________
 ______________________________________________________________________________________________________
 
 **References** <br/>
-Below you can find the links i've used to build my flask application. 
-http://flask.pocoo.org/docs/1.0/quickstart/ 
-https://www.youtube.com/watch?v=zRwy8gtgJ1A - This is a video i got the idea from, i have adapted and changed most of the content. Examples of how i changed it is i've applied the dry principle by seperating some of the logic in the python files such as supportFunction.py and also have added both the basic Api and the restful Api as well. To protect against request forgery i have wrapped the whole app with **csrf**.
-https://flask-mysqldb.readthedocs.io/en/latest/
-http://flask.pocoo.org/docs/1.0/patterns/wtforms/
-https://flask-wtf.readthedocs.io/en/stable/csrf.html
+Below you can find the links i've used to build my flask application. <br/>
+http://flask.pocoo.org/docs/1.0/quickstart/ <br/>
+https://www.youtube.com/watch?v=zRwy8gtgJ1A - This is a video i got the idea from, i have adapted and changed most of the content. Examples of how i changed it is i've applied the dry principle by seperating some of the logic in the python files such as supportFunction.py and also have added both the basic Api and the restful Api as well. To protect against request forgery i have wrapped the whole app with **csrf**. <br/>
+https://flask-mysqldb.readthedocs.io/en/latest/ <br/>
+http://flask.pocoo.org/docs/1.0/patterns/wtforms/ <br/>
+https://flask-wtf.readthedocs.io/en/stable/csrf.html <br/>
 
 
 
