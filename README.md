@@ -7,7 +7,7 @@
 
 **Link to all my commits** : https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/commits/master
 
-**This is a link to watch my y website working incase you cannot run it due to access** : http://doc.gold.ac.uk/~hmuus001/dw/hmuus001myApp.mp4
+**This is a link to watch my website working incase you cannot run it due to access** : http://doc.gold.ac.uk/~hmuus001/dw/hmuus001myApp.mp4
 
 Login Credentials<br/>
 **username** : admin <br/>
