@@ -13,6 +13,8 @@ Login Credentials<br/>
 ____________________________________
 **I have created my term 2 Final Flask application using the techniques I have gained over the course of the Data and the Web module, both in term 1 and term 2. With the Knowledge aquired from the lab content and the documentations, I have searched and found resources online one of which is a flask tutorial which is used to build an article flask app (see reference below). In order to extend on the online tutorial and the templates given to me, I have tried to implement the DRY (Don't Repeat Yourself) principle and separation of concern. I have done this by seperating my html files, my forms for registrations and to fill an article which will be explained more below and the logic to check if a user is logged in which will also be explained more below. Privacy is key, therefore i have ensured users of my web applications are protected against Cross Site Request Forgery.**
 
+**Please Note** All the lines in the tables below are links and can be clicked. Once clicked it will take you to the specific line mentioned and the file it is in.  
+
 **SUBMISSION:**
  
 | **SUBMISSION INSTRUCTIONS** | **COMPLETE/NOT COMPLETE** |
