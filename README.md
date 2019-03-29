@@ -64,6 +64,17 @@ ________________________________________________________________________________
 | 6 : Access Control|`app.py`<br/>[`Lines 342-343`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/myApp/app.py#L342) |One of the major changes and additions to my app is access control and making the app secure. One cannot edit or change an article/ forum post they havent written. I check if the user logged in is the one who is accessing the article if its not the access is unauthorized|
 | 7 :CSRF |`app.py` <br/> [`Line 30`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/myApp/app.py#L30)<br/> `add_article`<br/>[`Line 7`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/myApp/templates/add_article.html#L7)<br/>`edit_article`<br/>[`Line 7`](https://gitlab.doc.gold.ac.uk/hmuus001/term-2-lab/blob/master/myApp/templates/edit_article.html#L7)|I have ensured users of my web applications are protected against Cross-Site Request Forgery therefore to run and use the app a token is required.|
 
+______________________________________________________________________________________________________
+
+**References**
+Below you can find the links i've used to build my flask application. 
+http://flask.pocoo.org/docs/1.0/quickstart/ 
+https://www.youtube.com/watch?v=zRwy8gtgJ1A - This is a video i got the idea from, i have adapted and changed most of the content. Examples of how i changed it is i've applied the dry principle by seperating some of the logic in the python files such as supportFunction.py and also have added both the basic Api and the restful Api as well. To protect against request forgery i have wrapped the whole app with **csrf**.
+https://flask-mysqldb.readthedocs.io/en/latest/
+http://flask.pocoo.org/docs/1.0/patterns/wtforms/
+https://flask-wtf.readthedocs.io/en/stable/csrf.html
+
+
 
 **DELETE** CURL REQUEST
 `curl http://doc.gold.ac.uk/usr/289/apirestful/<ENTER ID TO DELETE> -X DELETE`
